@@ -99,8 +99,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   priceContainer: {
-    marginTop: 30,
-    position: "absolute",
+    //marginTop: 30,
+    // position: "absolute",
   },
   originalPrice: {
     textDecorationLine: "line-through",

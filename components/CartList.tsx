@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
   priceContainer: {
-    marginTop: 30,
-    position: "absolute",
+    //marginTop: 30,
+    //position: "absolute",
   },
 });
 
