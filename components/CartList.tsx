@@ -20,7 +20,7 @@ const CartList = () => {
       key={item._id}
       style={{ padding: 10, borderBottomWidth: 1, borderColor: "#ccc" }}
     >
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={{ flexDirection: "row" }}>
         <Image
           source={{ uri: item?.product?.imagePath }}
           style={styles.productImage}

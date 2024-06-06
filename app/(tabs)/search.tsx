@@ -30,6 +30,7 @@ const SearchScreen = () => {
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={50}
       >
         <AllProductList search={debouncedSearch} />
       </KeyboardAvoidingView>
