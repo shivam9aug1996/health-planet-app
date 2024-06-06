@@ -29,18 +29,21 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        // tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "gray",
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
+
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "home" : "home-outline"}
-              color={color}
+              color={"black"}
             />
           ),
         }}
@@ -56,7 +59,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "cart" : "cart-outline"}
-              color={color}
+              color={"black"}
             />
           ),
         }}
@@ -68,7 +71,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "search" : "search-outline"}
-              color={color}
+              color={"black"}
             />
           ),
         }}
@@ -84,7 +87,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "heart" : "heart-outline"}
-              color={color}
+              color={"black"}
             />
           ),
         }}
@@ -96,7 +99,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? "settings" : "settings-outline"}
-              color={color}
+              color={"black"}
             />
           ),
         }}
