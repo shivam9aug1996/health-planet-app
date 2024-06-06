@@ -37,7 +37,7 @@ export default function RootLayout() {
     <Provider store={store}>
       <ToastManager />
 
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={DefaultTheme}>
         <MainNavigator />
       </ThemeProvider>
     </Provider>
