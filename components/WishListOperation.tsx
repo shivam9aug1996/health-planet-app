@@ -1,15 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { useUpdateWishlistMutation } from "@/redux/features/wishlistSlice";
 import { Toast } from "toastify-react-native";
+import { useDispatch } from "react-redux";
+import { productApi } from "@/redux/features/productSlice";
 
 const WishListOperation = ({ isInWishList, userId, productId }) => {
-  const [localWishlistStatus, setLocalWishlistStatus] = useState(isInWishList);
+  const [localWishlistStatus, setLocalWishlistStatus] = useState();
+  const dispatch = useDispatch();
   const [
     updateWishlist,
     { isLoading, isSuccess, isError, error: updateError },
   ] = useUpdateWishlistMutation();
+
+  useEffect(() => {
+    setLocalWishlistStatus(isInWishList);
+  }, [isInWishList]);
 
   const handleUpdate = async () => {
     if (!userId) {
@@ -24,7 +31,9 @@ const WishListOperation = ({ isInWishList, userId, productId }) => {
         userId,
         productId,
         action: localWishlistStatus ? "remove" : "add",
-      }).unwrap();
+      })
+        .unwrap()
+        ?.then(() => {});
     } catch (err) {
       console.error("Failed to update wishlist:", err);
       setLocalWishlistStatus(localWishlistStatus); // Revert back to original status on error

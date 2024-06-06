@@ -7,6 +7,7 @@ import CartOperationButton from "./CartOperationButton";
 import { useFetchWishlistQuery } from "@/redux/features/wishlistSlice";
 import WishListOperation from "./WishListOperation";
 import PriceContainer from "./PriceContainer";
+import { useFocusEffect } from "expo-router";
 
 const AllProductList = ({ search }) => {
   const { isSuccess, isLoading, isError, error, data } =
@@ -40,97 +41,158 @@ const AllProductList = ({ search }) => {
     { skip: !userId }
   );
   const [combineData, setCombineData] = useState([]);
+  // console.log("iuredfghjk8765", JSON.stringify(wishListData));
+  // useEffect(() => {
+  //   if (cartData && data && wishListData && userId) {
+  //     console.log("iuredfghjk8765");
+  //     // Create a lookup object for cart items
+  //     const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
+  //       acc[cartItem?.productId] = cartItem?.quantity;
+  //       return acc;
+  //     }, {});
+  //     const wishListLookup = wishListData?.wishlistItems?.reduce(
+  //       (acc, wishListItem) => {
+  //         acc[wishListItem?.productId] = wishListItem?.productId;
+  //         return acc;
+  //       },
+  //       {}
+  //     );
 
-  useEffect(() => {
-    if (cartData && data && wishListData && userId) {
-      // Create a lookup object for cart items
-      const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
-        acc[cartItem?.productId] = cartItem?.quantity;
-        return acc;
-      }, {});
-      const wishListLookup = wishListData?.wishlistItems?.reduce(
-        (acc, wishListItem) => {
-          acc[wishListItem?.productId] = wishListItem?.productId;
+  //     // Combine products with their quantities from the cart
+  //     const combinedProducts = data?.products?.map((product) => {
+  //       return {
+  //         ...product,
+  //         quantity: cartLookup?.[product?._id] || 0,
+  //         isInWishList: wishListLookup?.[product?._id] || false,
+  //         // Default to 0 if the product is not in the cart
+  //       };
+  //     });
+  //     console.log("o8765edfghjkl", JSON.stringify(combinedProducts));
+  //     setCombineData(combinedProducts);
+  //   } else if (data) {
+  //     const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
+  //       acc[cartItem?.productId] = cartItem?.quantity;
+  //       return acc;
+  //     }, {});
+  //     const wishListLookup = wishListData?.wishlistItems?.reduce(
+  //       (acc, wishListItem) => {
+  //         acc[wishListItem?.productId] = wishListItem?.productId;
+  //         return acc;
+  //       },
+  //       {}
+  //     );
+
+  //     // Combine products with their quantities from the cart
+  //     const combinedProducts = data?.products?.map((product) => {
+  //       return {
+  //         ...product,
+  //         quantity: cartLookup?.[product?._id] || 0,
+  //         isInWishList: wishListLookup?.[product?._id] || false,
+  //         // Default to 0 if the product is not in the cart
+  //       };
+  //     });
+  //     setCombineData(combinedProducts);
+  //   }
+  // }, [cartData, data, wishListData]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      if (cartData && data && wishListData && userId) {
+        console.log("iuredfghjk8765");
+        // Create a lookup object for cart items
+        const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
+          acc[cartItem?.productId] = cartItem?.quantity;
           return acc;
-        },
-        {}
-      );
+        }, {});
+        const wishListLookup = wishListData?.wishlistItems?.reduce(
+          (acc, wishListItem) => {
+            acc[wishListItem?.productId] = wishListItem?.productId;
+            return acc;
+          },
+          {}
+        );
 
-      // Combine products with their quantities from the cart
-      const combinedProducts = data?.products?.map((product) => {
-        return {
-          ...product,
-          quantity: cartLookup?.[product?._id] || 0,
-          isInWishList: wishListLookup?.[product?._id] || false,
-          // Default to 0 if the product is not in the cart
-        };
-      });
-      setCombineData(combinedProducts);
-    } else if (data) {
-      const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
-        acc[cartItem?.productId] = cartItem?.quantity;
-        return acc;
-      }, {});
-      const wishListLookup = wishListData?.wishlistItems?.reduce(
-        (acc, wishListItem) => {
-          acc[wishListItem?.productId] = wishListItem?.productId;
+        // Combine products with their quantities from the cart
+        const combinedProducts = data?.products?.map((product) => {
+          return {
+            ...product,
+            quantity: cartLookup?.[product?._id] || 0,
+            isInWishList: wishListLookup?.[product?._id] || false,
+            // Default to 0 if the product is not in the cart
+          };
+        });
+        console.log("o8765edfghjkl", JSON.stringify(combinedProducts));
+        setCombineData(combinedProducts);
+      } else if (data) {
+        const cartLookup = cartData?.cartItems?.reduce((acc, cartItem) => {
+          acc[cartItem?.productId] = cartItem?.quantity;
           return acc;
-        },
-        {}
-      );
+        }, {});
+        const wishListLookup = wishListData?.wishlistItems?.reduce(
+          (acc, wishListItem) => {
+            acc[wishListItem?.productId] = wishListItem?.productId;
+            return acc;
+          },
+          {}
+        );
 
-      // Combine products with their quantities from the cart
-      const combinedProducts = data?.products?.map((product) => {
-        return {
-          ...product,
-          quantity: cartLookup?.[product?._id] || 0,
-          isInWishList: wishListLookup?.[product?._id] || false,
-          // Default to 0 if the product is not in the cart
-        };
-      });
-      setCombineData(combinedProducts);
-    }
-  }, [cartData, data, wishListData]);
+        // Combine products with their quantities from the cart
+        const combinedProducts = data?.products?.map((product) => {
+          return {
+            ...product,
+            quantity: cartLookup?.[product?._id] || 0,
+            isInWishList: wishListLookup?.[product?._id] || false,
+            // Default to 0 if the product is not in the cart
+          };
+        });
+        setCombineData(combinedProducts);
+      }
+      // Refetch data or perform any necessary operations when screen gains focus
+    }, [cartData, data, wishListData])
+  );
 
-  const renderProductItem = ({ item }) => (
-    <View style={styles.productItem}>
-      <View
-        style={{
-          position: "absolute",
-          padding: 20,
-          alignSelf: "flex-end",
-          zIndex: 1,
-        }}
-      >
-        <WishListOperation
-          isInWishList={item?.isInWishList}
+  const renderProductItem = ({ item }) => {
+    console.log("765redfg", item?.isInWishList);
+    return (
+      <View style={styles.productItem}>
+        <View
+          style={{
+            position: "absolute",
+            padding: 20,
+            alignSelf: "flex-end",
+            zIndex: 1,
+          }}
+        >
+          <WishListOperation
+            isInWishList={item?.isInWishList}
+            userId={userId}
+            productId={item?._id}
+          />
+        </View>
+        <Image
+          source={{ uri: item.imagePath }}
+          style={styles.productImage}
+          resizeMode="contain"
+        />
+        <View style={styles.productDetails}>
+          <Text style={styles.productName}>{item.name}</Text>
+
+          <PriceContainer
+            wrapperStyle={{ marginTop: 5 }}
+            price={item?.price}
+            discountedPrice={item?.discountedPrice}
+          />
+        </View>
+
+        <CartOperationButton
+          quantity={item?.quantity}
           userId={userId}
           productId={item?._id}
         />
       </View>
-      <Image
-        source={{ uri: item.imagePath }}
-        style={styles.productImage}
-        resizeMode="contain"
-      />
-      <View style={styles.productDetails}>
-        <Text style={styles.productName}>{item.name}</Text>
-
-        <PriceContainer
-          wrapperStyle={{ marginTop: 5 }}
-          price={item?.price}
-          discountedPrice={item?.discountedPrice}
-        />
-      </View>
-
-      <CartOperationButton
-        quantity={item?.quantity}
-        userId={userId}
-        productId={item?._id}
-      />
-    </View>
-  );
-
+    );
+  };
+  console.log("i87654erfghjhgfd", JSON.stringify(combineData));
   return (
     <View style={styles.container}>
       {isLoading ? (
